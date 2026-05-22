@@ -12,6 +12,18 @@ This repository contains **detection rules** (YAML), **KQL hunting queries**, an
 
 ## 📁 Repository Structure
 
+sentinel-detections/
+├── detections/ # YAML detection rules (source of truth)
+│ ├── AnomalousSignIn.yaml
+│ ├── PrivilegeEscalation.yaml
+│ └── SuspiciousActivityLog.yaml
+├── queries/ # KQL hunting queries
+│ └── hunting_anomalous_signin.kql
+├── docs/
+│ ├── false-positives-tuning.md
+│ └── detection-lifecycle.md
+└── README.md
+
 ---
 
 ## 🛡️ Detection Rules
@@ -83,4 +95,30 @@ Test queries directly in Sentinel **Logs** blade before deploying a rule.
 Example – validate that `SigninLogs` contains data:
 
 ```kusto
-SigninLogs | take 10
+SigninLogs | take 10 
+```
+
+## 🤝 Acknowledgements
+Microsoft Sentinel documentation
+
+MITRE ATT&CK framework
+
+Azure Cloud Shell for safe experimentation
+
+# Detection Lifecycle
+
+## Stages
+1. **Identify coverage gap** (e.g., missing MITRE technique)
+2. **Write YAML** → commit to `feature/rule-name` branch
+3. **PR & review** → merge to `main`
+4. **Deploy to dev Sentinel** (script or manual)
+5. **Observe & tune** → update YAML, commit, redeploy
+6. **Promote to production**
+7. **Archive after 6 months of low signal**
+
+## Versioning example
+```bash
+git tag v1.0.0
+git push origin v1.0.0
+```
+
