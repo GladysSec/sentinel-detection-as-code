@@ -107,11 +107,11 @@ Azure Cloud Shell for safe experimentation
 # Detection Lifecycle
 
 ## Stages
-1. **Identify coverage gap** (e.g., missing MITRE technique)
-2. **Write YAML** → commit to `feature/rule-name` branch
-3. **PR & review** → merge to `main`
+1. **Identify coverage gap** (missing MITRE technique)
+2. **Write YAML** - commit to `feature/rule-name` branch
+3. **PR & review** - merge to `main`
 4. **Deploy to dev Sentinel** (script or manual)
-5. **Observe & tune** → update YAML, commit, redeploy
+5. **Observe & tune** - update YAML, commit, redeploy
 6. **Promote to production**
 7. **Archive after 6 months of low signal**
 
