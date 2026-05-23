@@ -12,7 +12,7 @@ This repository contains **detection rules** (YAML), **KQL hunting queries**, an
 
 ## 📁 Repository Structure
 
-sentinel-detections/
+``` sentinel-detections/
 ├── detections/ # YAML detection rules (source of truth)
 │ ├── AnomalousSignIn.yaml
 │ ├── PrivilegeEscalation.yaml
@@ -23,6 +23,7 @@ sentinel-detections/
 │ ├── false-positives-tuning.md
 │ └── detection-lifecycle.md
 └── README.md
+```
 
 ---
 
