@@ -6,7 +6,7 @@ Detection‑as‑Code for Microsoft Sentinel – YAML rules, KQL hunting, MITRE 
 [![Version](https://img.shields.io/badge/version-1.0.0-blue)]()
 [![MITRE ATT&CK](https://img.shields.io/badge/MITRE%20ATT&CK-InitialAccess%2C%20PrivilegeEscalation%2C%20Impact-red)]()
 
-This repository contains **detection rules** (YAML), **KQL hunting queries**, and **lifecycle documentation** for Microsoft Sentinel. The rules are deployed to a live Sentinel workspace and follow the Detection-as-Code (DaC) approach – version controlled, peer‑reviewable, and documented.
+This repository contains **detection rules** (YAML), **KQL hunting queries**, and **lifecycle documentation** for Microsoft Sentinel. The rules are deployed to a live Sentinel workspace and follow the Detection-as-Code (DaC) approach,version controlled, peer reviewable and documented.
 
 ---
 
