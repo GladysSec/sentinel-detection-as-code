@@ -53,7 +53,7 @@ Each YAML rule includes:
 
 ## 🔍 Hunting Queries
 
-The [`queries/`](./queries) folder contains proactive KQL hunts, e.g.:
+The ![hunting_anomalous_signin.kql](/images/hunting_anomalous_signin.kql.png) folder contains proactive KQL hunts,
 
 - **Impossible travel** – same user logging from two distant locations within a short time.
 
