@@ -1,0 +1,7 @@
+// Hunting: Impossible travel - same user, different locations within 1 hour
+SigninLogs
+| order by UserPrincipalName, TimeGenerated asc
+| extend NextLocation = next(Location, 1), NextTime = next(TimeGenerated, 1)
+| where datetime_diff('minute', NextTime, TimeGenerated) < 60
+| where Location != NextLocation
+| project UserPrincipalName, TimeGenerated, Location, NextLocation, NextTime
