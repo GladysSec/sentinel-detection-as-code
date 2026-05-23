@@ -80,6 +80,19 @@ The lifecycle document ([`docs/detection-lifecycle.md`](./docs/detection-lifecyc
 
 ---
 
+## Architecture
+```mermaid
+graph TD
+    A[Azure Activity Logs] --> B[Log Analytics Workspace]
+    C[Entra ID SigninLogs] --> B
+    B --> D[Microsoft Sentinel]
+    D --> E[Analytics Rules - 3 YAML rules]
+    E --> F[Security Alerts]
+    F --> G[Incidents]
+    G --> H[Manual Investigation and Response]
+```
+
+
 ## 🚀 Deployment
 
 > **Note:** Because I am a tenant in a shared Azure environment, rules were **deployed manually** via the Sentinel portal to ensure full transparency and safety.  
@@ -116,9 +129,19 @@ Azure Cloud Shell for safe experimentation
 6. **Promote to production**
 7. **Archive after 6 months of low signal**
 
-## Versioning example
-```bash
-git tag v1.0.0
-git push origin v1.0.0
-```
+---
+
+## 4. Threat Model & Data Sources Table
+
+```markdown
+## Threat Model & Data Sources
+
+| Data Source | MITRE Tactics | Detection Rule | Normalisation |
+|-------------|---------------|----------------|---------------|
+| `SigninLogs` (Entra ID) | InitialAccess, CredentialAccess | Anomalous Sign‑in from Unusual Location | Future: ASIM Authentication Schema |
+| `AzureActivity` | PrivilegeEscalation | Suspicious Role Assignment or Elevation | ASIM Audit Schema (planned) |
+| `AzureActivity` | Impact, DefenseEvasion | Abnormal VM Creation or Deletion Burst | ASIM Audit Schema (planned) |
+
+**Covered MITRE techniques:** T1078, T1078.004, T1098, T1098.003, T1485, T1496.
+
 
