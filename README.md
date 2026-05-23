@@ -95,8 +95,6 @@ graph TD
 
 ## 🚀 Deployment
 
-> **Note:** Because I am a tenant in a shared Azure environment, rules were **deployed manually** via the Sentinel portal to ensure full transparency and safety.  
-
 For automated deployment (if you have appropriate permissions), use the PowerShell script in [`scripts/deploy-rules.ps1`](./scripts/deploy-rules.ps1).  
 It reads each YAML and creates/updates the rule using `New-AzSentinelAlertRule`.
 
@@ -131,7 +129,7 @@ Azure Cloud Shell for safe experimentation
 
 ---
 
-## 4. Threat Model & Data Sources Table
+## Threat Model & Data Sources Table
 
 ```markdown
 ## Threat Model & Data Sources
