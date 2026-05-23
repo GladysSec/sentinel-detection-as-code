@@ -1,0 +1,7 @@
+{
+  "type": 1,
+  "content": {
+    "json": "SecurityAlert\n| where TimeGenerated > ago(7d)\n| where AlertName has_any (\"Anomalous Sign-in\", \"Suspicious Role\", \"Abnormal VM\")\n| summarize Count = count() by AlertName, bin(TimeGenerated, 1h)\n| render timechart"
+  },
+  "name": "text - 2"
+}
