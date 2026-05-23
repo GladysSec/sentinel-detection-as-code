@@ -1,0 +1,42 @@
+name: "Anomalous Sign-in from Unusual Location"
+description: |
+  Detects sign-ins from a location that is not among the user's top 10 frequent locations.
+severity: Medium
+enabled: true
+query: |
+  let frequentLocations = SigninLogs
+  | where TimeGenerated > ago(14d)
+  | summarize FrequentLocations = make_set(Location) by UserPrincipalName;
+  let recentSignins = SigninLogs
+  | where TimeGenerated > ago(1h);
+  recentSignins
+  | join kind=leftouter frequentLocations on UserPrincipalName
+  | where FrequentLocations !contains Location
+  | project TimeGenerated, UserPrincipalName, Location, IPAddress, AppDisplayName
+queryFrequency: 6h
+queryPeriod: 14d
+triggerOperator: GreaterThan
+triggerThreshold: 0
+suppressionDuration: 6h
+suppressionEnabled: false
+eventGroupingSettings:
+  aggregationKind: SingleAlert
+entityMappings:
+  - entityType: Account
+    fieldMappings:
+      - identifier: FullName
+        columnName: UserPrincipalName
+  - entityType: IP
+    fieldMappings:
+      - identifier: Address
+        columnName: IPAddress
+  - entityType: Location
+    fieldMappings:
+      - identifier: Country
+        columnName: Location
+tactics:
+  - InitialAccess
+  - CredentialAccess
+techniques:
+  - T1078
+  - T1078.004
