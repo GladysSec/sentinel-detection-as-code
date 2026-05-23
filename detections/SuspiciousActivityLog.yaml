@@ -1,0 +1,39 @@
+name: "Abnormal VM Creation or Deletion Burst"
+description: |
+  Detects a sudden burst of VM creation/deletion from a single actor.
+severity: Medium
+enabled: true
+query: |
+  AzureActivity
+  | where OperationNameValue in~ ("MICROSOFT.COMPUTE/VIRTUALMACHINES/WRITE",
+                                  "MICROSOFT.COMPUTE/VIRTUALMACHINES/DELETE")
+  | where ActivityStatusValue == "Success"
+  | summarize EventCount = count() by Caller, bin(TimeGenerated, 5m)
+  | where EventCount > 5
+  | join kind=inner (AzureActivity | where OperationNameValue in~ ("MICROSOFT.COMPUTE/VIRTUALMACHINES/WRITE",
+                                                                    "MICROSOFT.COMPUTE/VIRTUALMACHINES/DELETE"))
+    on Caller
+  | project TimeGenerated, Caller, OperationNameValue, Resource, ResourceGroup
+queryFrequency: 1h
+queryPeriod: 24h
+triggerOperator: GreaterThan
+triggerThreshold: 0
+suppressionDuration: 4h
+suppressionEnabled: false
+eventGroupingSettings:
+  aggregationKind: SingleAlert
+entityMappings:
+  - entityType: Account
+    fieldMappings:
+      - identifier: FullName
+        columnName: Caller
+  - entityType: AzureResource
+    fieldMappings:
+      - identifier: ResourceId
+        columnName: Resource
+tactics:
+  - Impact
+  - DefenseEvasion
+techniques:
+  - T1485
+  - T1496
