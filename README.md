@@ -46,9 +46,8 @@ Each YAML rule includes:
 
 > Screenshot of the three rules active in Microsoft Sentinel:
 
-![active_rules](/screenshots/active_rules.png)
+![active_rules](/images/active_rules.png)
 
-*(You will add this screenshot in Step 4)*
 
 ---
 
