@@ -1,7 +1,20 @@
 {
-  "type": 1,
-  "content": {
-    "json": "SecurityAlert\n| where TimeGenerated > ago(7d)\n| where AlertName has_any (\"Anomalous Sign-in\", \"Suspicious Role\", \"Abnormal VM\")\n| summarize Count = count() by AlertName, bin(TimeGenerated, 1h)\n| render timechart"
-  },
-  "name": "text - 2"
+  "version": "Notebook/1.0",
+  "items": [
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "SecurityAlert\n| where TimeGenerated > ago(7d)\n| where AlertName in (\"Anomalous Sign-in from Unusual Location\", \"Suspicious Role Assignment or Elevation\", \"Abnormal VM Creation or Deletion Burst\")\n| summarize Count = count() by AlertName, bin(TimeGenerated, 1h)\n| render timechart",
+        "size": {
+          "horizontal": 2,
+          "vertical": 1
+        },
+        "queryType": 0,
+        "resourceType": "microsoft.operationalinsights/workspaces"
+      },
+      "name": "Detections over time"
+    }
+  ],
+  "fallbackResourceIds": []
 }
